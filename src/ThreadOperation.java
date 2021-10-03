@@ -4,7 +4,6 @@ public class ThreadOperation extends Thread {
   protected int[][] arrayTwo;
   protected int[][] arrayC;
 
-
   public ThreadOperation(int[][] arrayOne, int[][] arrayTwo, int[][] arrayC){
     this.arrayOne = arrayOne;
     this.arrayTwo = arrayTwo;

@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,21 +22,17 @@ public class Main {
     initArray(arrayOne);
     initArray(arrayTwo);
 
-    // can you overload run method in Thread?
-    Thread t1 = new ThreadOperation(arrayOne, arrayTwo, arrayC);
-    t1.run();
+    ThreadOperation t0 = new ThreadOperation(arrayOne, arrayTwo, arrayC);
+    t0.run();
 
-    // Second Quadrant Thread
+    ThreadOperation t1 = new ThreadOperation(arrayOne, arrayTwo, arrayC);
+    t1.run(collum/2, collum);
+
     ThreadOperation t2 = new ThreadOperation(arrayOne, arrayTwo, arrayC);
-    t2.run(collum/2, collum);
+    t2.run(row/2, row, 0, collum/2 );
 
-    // Third Quadrant Thread
     ThreadOperation t3 = new ThreadOperation(arrayOne, arrayTwo, arrayC);
-    t3.run(row/2, row, 0, collum/2 );
-
-    // Fourth Quadrant Thread
-    ThreadOperation t4 = new ThreadOperation(arrayOne, arrayTwo, arrayC);
-    t4.run(row/2, row, collum/2, collum);
+    t3.run(row/2, row, collum/2, collum);
     System.out.println("Printing the Sum of two arrays");
     printArray(arrayC);
 
@@ -52,6 +47,8 @@ public class Main {
       System.out.println();
     }
   }
+
+
   private static void printArray(int[][] array) {
     for (int[] ints : array) {
       for (int anInt : ints) {
