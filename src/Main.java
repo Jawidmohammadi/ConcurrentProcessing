@@ -5,10 +5,11 @@ import java.util.Scanner;
 
 public class Main {
 
-  private static Path path = Paths.get("matrix1.txt");
+  private static Path path;
   private static Scanner scanner;
   public static void main(String[] args) throws InterruptedException {
 
+    path = Paths.get(args[0]);
     try { scanner = new Scanner(path);
     } catch (IOException e ){
       System.out.println("Invalid Input");
@@ -21,21 +22,21 @@ public class Main {
     System.out.println("Printing the matrix");
     initArray(arrayOne);
     initArray(arrayTwo);
-
-    ThreadOperation t0 = new ThreadOperation(arrayOne, arrayTwo, arrayC);
-    t0.run();
-
-    ThreadOperation t1 = new ThreadOperation(arrayOne, arrayTwo, arrayC);
-    t1.run(collum/2, collum);
-
-    ThreadOperation t2 = new ThreadOperation(arrayOne, arrayTwo, arrayC);
-    t2.run(row/2, row, 0, collum/2 );
-
-    ThreadOperation t3 = new ThreadOperation(arrayOne, arrayTwo, arrayC);
-    t3.run(row/2, row, collum/2, collum);
-    System.out.println("Printing the Sum of two arrays");
+    System.out.println();
+    ThreadOperation t0 = new ThreadOperation(arrayOne, arrayTwo, arrayC, 0, arrayOne.length/2,0,arrayOne[0].length/2 );
+    ThreadOperation t1 = new ThreadOperation(arrayOne, arrayTwo, arrayC, 0, arrayOne.length/2,arrayOne[0].length/2, arrayOne[0].length );
+    ThreadOperation t2 = new ThreadOperation(arrayOne, arrayTwo, arrayC, arrayOne.length/2, arrayOne.length,0,arrayOne[0].length/2 );
+    ThreadOperation t3 = new ThreadOperation(arrayOne, arrayTwo, arrayC, arrayOne.length/2, arrayOne.length,arrayOne[0].length/2,arrayOne[0].length );
+    t0.start();
+    t1.start();
+    t2.start();
+    t3.start();
+    t0.join();
+    t1.join();
+    t2.join();
+    t3.join();
+    System.out.println("Printing Sum of two arrays");
     printArray(arrayC);
-
   }
 
   private static void initArray(int[][] array) {
